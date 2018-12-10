@@ -24,6 +24,8 @@
 - Not efficient for random access to items.
 - Worse memory locality than arrays.
 
+- In `Python`, `list`s are [*not*](https://stackoverflow.com/questions/280243/python-linked-list) linked lists!
+
 ## Stacks and Queues
 
 - Stacks – LIFO (push, pop)

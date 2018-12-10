@@ -6,6 +6,14 @@
 * [A Comprehensive Guide to Building a Scalable Web App on Amazon Web Services](https://www.airpair.com/aws/posts/building-a-scalable-web-app-on-amazon-web-services-p1)
 * [Notes on Google's Site Reliability Engineering Book](http://danluu.com/google-sre-book/) or [the book itself](https://landing.google.com/sre/book.html)
 
+
+## Miscelaneous
+
+- Memory vs. Storage: fast access vs perstistence. E.g. applications are stored in Storage, but run on Memory. Hence possible crash if too many applications are open at the same time.
+- Memory is a long tape of bytes (packs of 8 bits). Each app has access to a number of contiguous bytes on the tape.
+
+
+
 ## HDD
 
 - Stores data on a series of constantly-spinning magnetic disks, called platters.

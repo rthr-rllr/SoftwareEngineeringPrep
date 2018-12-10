@@ -3,7 +3,18 @@
 - https://gist.github.com/jboner/2841832
 - http://www.eecs.berkeley.edu/~rcs/research/interactive_latency.html
 
+
+## Miscelaneous
+
+type  | bits
+------|---------------
+int   | 32 (or 64)
+
+
+
+
 ## Latency
+
 
 ### Memory
 
