@@ -1,0 +1,71 @@
+2-Sums:
+
+list = [2,3,5,1,8]
+k = 6
+
+sortedList = [1,2,3,5,8]
+sortedList = [-10, -5, -4, -3, 1, 2, 3, 5, 8, 15, 17, 20]
+
+S > k
+I vers la gauche OR j vers la gauche
+S < k
+I vers la droite OR J vers la droite
+
+
+output result [(5,1), (3,3)]
+(1,5) (3,3)
+(1,5) (3,3)
+
+expected result [(1,5), (3,3)]
+(1,5) (3,3)
+(1,5) (3,3)
+
+
+
+Def test_get2Sum_fast(ls, k, expectedRes):
+	
+	Out = get2Sum_fast(ls, k)
+	Out = sortOutput(Out)
+	expectedRes = sortOutput(expectedRes)
+
+	Return (expectedRes == Out)
+
+
+
+
+Def get2Sum_fast(ls, k):
+
+	sortedList = ls.sort() # nlogn
+	N = len(ls)
+	Res = []
+
+	I, j = 0, N-1
+	While i <= j:
+	
+	S = sortedList[i] + sortedList[j]
+	If S > k:
+		J -= 1
+	If S < k:
+		I += 1
+	If S == k:
+		Res.append((sortedList[i],sortedList[j]))
+		J -= 1
+
+	Return res
+
+
+
+
+
+Def get2Sum(ls, k):
+
+	N = len(ls)
+	Res = []
+	For i in range(N):
+		For j in range(i,N):
+
+			S = ls[i] + ls[j]
+			If s == k:
+				Res.append((ls[i],ls[j]))
+
+	Return res
