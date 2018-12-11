@@ -17,6 +17,8 @@
 - `O(f(n)) + O(g(n))` => `O(max(f(n), g(n)))` => `n^3 + n^2 + n + 1 = O(n^3)`
 - `O(f(n)) ∗ O(g(n))` => `O(f(n) ∗ g(n))`
 
+- worst case vs. amortized worst case: amortized analysis tends to asses the worst case per algorithm, instead of summing up the worst cases per operation (wikipedia [article](https://en.wikipedia.org/wiki/Amortized_analysis)).
+
 ## Recursion Complexity Analysis
 
 - Let `T(n)` be the recursive function.
@@ -51,3 +53,10 @@ S(inf) = a(1)/(1 - q)
 
 - `1 + 2 + ... + n = n * (n + 1) / 2`
 - `x + x/2 + x/4 + ... = 2x`
+
+
+## Common operations in `Python`
+
+- see this [list](https://wiki.python.org/moin/TimeComplexity)
+
+
