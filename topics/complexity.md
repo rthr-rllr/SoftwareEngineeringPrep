@@ -77,6 +77,6 @@ From [wikipedia](http://en.wikipedia.org/wiki/Search_data_structure):
 
 ## All Operations in `Python`
 
-- see one table relating all operations per data structure [here](https://wiki.python.org/moin/TimeComplexity).
+- see all tables relating all operations for `Python` data structures [here](https://wiki.python.org/moin/TimeComplexity).
 
 
