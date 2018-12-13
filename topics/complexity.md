@@ -65,14 +65,14 @@ From [wikipedia](http://en.wikipedia.org/wiki/Search_data_structure):
  Unsorted array       | O(1)     | O(1)       | O(n)     | O(n)         
  Value-indexed array  | O(1)     | O(1)       | O(1)     | O(n)         
  Sorted array         | O(n)     | O(n)       | O(log n) | O(n)         
- Unsorted linked list | O(1)*    | O(1)*      | O(n)     | O(n)         
- Sorted linked list   | O(n)*    | O(1)*      | O(n)     | O(n)         
+ Unsorted linked list | O(1)a    | O(1)a      | O(n)     | O(n)         
+ Sorted linked list   | O(n)a    | O(1)a      | O(n)     | O(n)         
  Balanced binary tree | O(log n) | O(log n)   | O(log n) | O(n)         
- Heap                 | O(log n) | O(log n)** | O(n)     | O(n)         
+ Heap                 | O(log n) | O(log n)b  | O(n)     | O(n)         
  Hash table           | O(1)     | O(1)       | O(1)     | O(n)         
 
-* The cost to add or delete an element into a known location in the list (i.e. if you have an iterator to the location) is O(1). If you don't know the location, then you need to traverse the list to the location of deletion/insertion, which takes O(n) time. 
-** The deletion cost is O(log n) for the minimum or maximum, O(n) for an arbitrary element.
+(a) The cost to add or delete an element into a known location in the list (i.e. if you have an iterator to the location) is O(1). If you don't know the location, then you need to traverse the list to the location of deletion/insertion, which takes O(n) time. 
+(b) The deletion cost is O(log n) for the minimum or maximum, O(n) for an arbitrary element.
 
 
 ## Common operations in `Python`
