@@ -38,6 +38,8 @@ If it converges:
 S(inf) = a(1)/(1 - q)
 ```
 
+- If for some reason I cannot manage to derive the complexity, *please think of* writing down a table with number of iterations vs. size of input: this will make patterns appear!
+
 ## Combinatorics
 
 - All pairs: `O(n^2)`

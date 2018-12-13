@@ -21,19 +21,26 @@
 - Selection and Insertion are very similar, with a difference that after `k` iterations Selection will have the `k` smallest elements in the input, and Insertion will have the arbitrary first `k` elements in the input that it processed.
 - Selection Sort *writes* less to memory (Insertion writes every step because of swapping), so it may be preferable in cases where writing to memory is significantly more expensive than reading.
 
+### Bubblesort
+
+- "naive": compare pairs in a sliding window fashion, swap elements if needed, repeat n times.
+- Time: `O(n^2)` worst and average case, `O(n)` best case. Space: `O(1)`.
+
 ### Mergesort
 
 - A recursive approach to sorting involves partitioning the elements into two groups, sorting each of the smaller problems recursively, and then interleaving (merging) the two sorted lists to totally order the elements.
 - The efficiency of mergesort depends upon how efficiently we combine the two sorted halves into a single sorted list.
 - Merging on each level is done by examining the first elements in the two merged lists. The smallest element must be the head of either of the lists. Removing it, the next element must again be the head of either of the lists, and so on. So the merge operation in each level is linear.
-- This yields an efficiency of `O(nlog(n))`.
+    - This yields an efficiency of `O(nlog(n))`.
 - Mergesort is **great** for sorting **linked lists** because it does not access random elements directly (like heapsort or quicksort), but **DON'T** try to sort linked lists in an interview.
 - When sorting arrays with mergesort an additional 3rd array buffer is *required* for the merging operation (can be implemented in-place tho without an additional buffer, but requires complicated buffer manipulation).
+    - overall, space complexity is `O(n)`.
 - Classic *divide-and-conquer* algorithm, the key is in the merge implementation.
 
 ### Quicksort
 
 - Can be done in-place (using swaps), doesn't require an additional buffer.
+    - therefore, space complexity is `O(1)`.
 - Select a random item `p` from the items we want to sort, and split the remaining `n-1` items to two groups, those that are above `p` and below `p`. Now sort each group in itself. This leaves `p` in its exact place in the sorted array.
 - Partitioning the remaining `n-1` items is linear (this step is equivalent to the "merge" part in merge sort; merge => partition).
 - Total time is `O(n * h)` where `h` = height of the recursion tree (number of recursions).
@@ -202,3 +209,8 @@
 
 - A string metric for measuring the difference between two sequences.
 - The Levenshtein distance between two words is the minimum number of single-character edits (i.e. insertions, deletions or substitutions) required to change one word into the other.
+
+
+## Resources
+
+- this [site](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html) with a lot of algorithms visualisations, great to feel what's going on.
