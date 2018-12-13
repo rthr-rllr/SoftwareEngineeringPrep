@@ -1,5 +1,10 @@
 # Algorithms Code Examples
 
+> To be completed, following the original `Java` cheatsheet.
+
+_____
+
+
 <!-- All examples can use the utility function `swap`:
 
 ```java
