@@ -55,7 +55,7 @@ S(inf) = a(1)/(1 - q)
 - `x + x/2 + x/4 + ... = 2x`
 
 
-## Insertion Deletion Search
+## Insertion Deletion Search in General
 
 From [wikipedia](http://en.wikipedia.org/wiki/Search_data_structure):
 
@@ -75,8 +75,8 @@ From [wikipedia](http://en.wikipedia.org/wiki/Search_data_structure):
 (b) The deletion cost is O(log n) for the minimum or maximum, O(n) for an arbitrary element.
 
 
-## Common operations in `Python`
+## All Operations in `Python`
 
-- see this [list](https://wiki.python.org/moin/TimeComplexity)
+- see one table relating all operations per data structure [here](https://wiki.python.org/moin/TimeComplexity).
 
 
