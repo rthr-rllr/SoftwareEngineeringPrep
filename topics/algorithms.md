@@ -10,6 +10,14 @@
 - To use divide-and-conquer as an algorithm design technique, we must divide the problem into two smaller subproblems, solve each of them recursively, and then meld the two partial solutions into one solution to the full problem. Whenever the merging takes less time than solving the two subproblems, we get an efficient algorithm.
 - Mergesort is a classic example of divide and conquer (the merge operation is linear).
 
+
+## Hashing
+
+- (see also [Hash Tables in Data Structures](topics/data-structures.md#hash tables))
+
+- Hash functions come up all the time in interviews, and *hashing often improves, or simplify, or is a important part of, solving coding problems*, give it a try!
+
+
 ## Sorting
 
 - "Naive" sorting algorithms run in `O(n^2)` while enumerating all pairs.
@@ -20,6 +28,10 @@
 - Insertion sort is a little more efficient than selection, because the inner `j` loop uses a while, only scanning until the right place in the sorted part of the array is found for the new item. Selection sort scans all items to always find the minimum item.
 - Selection and Insertion are very similar, with a difference that after `k` iterations Selection will have the `k` smallest elements in the input, and Insertion will have the arbitrary first `k` elements in the input that it processed.
 - Selection Sort *writes* less to memory (Insertion writes every step because of swapping), so it may be preferable in cases where writing to memory is significantly more expensive than reading.
+- Some sorting algorithms are equivalent to using *Selection Sort* in (actually filling in, then iteratively popping from) a priority queue (the hard part being in the priority queue): Heap Sort (heap for the p.q.), Smooth Sort (Leonardo heap fro p.q.), Tree Sort (self-balancing binary search tree for the p.q.).
+
+- *Sorting often improves, or simplify, or is a important part of, solving coding problems*, give it a try!
+
 
 ### Bubblesort
 
@@ -101,6 +113,7 @@
     - One-sided binary search: if we don't know the size of the array, we can test repeatedly at larger intervals (`A[1]`, `A[2]`, `A[4]`, `A[8]`, `A[16]`, `...`) until we find an item larger than our search term, and then narrow in using regular binary search. This results in `2*log(p)` (where `p` is the index we're after), regardless how large the array is. This is most useful when `p` is relatively close to our start position.
 - Binary search can be used to find the roots of continuous functions, assuming that we have two points where `f(x) > 0` and `f(x) < 0` (there are better algorithms which use interpolation to find the root faster, but binary search still works well).
 
+- see also [Graph Traversal](topics/algorithms.md#graph algorithms) and [Tree traversal](topics/data-structures.md#tree traversal)
 
 ## Randomization
 

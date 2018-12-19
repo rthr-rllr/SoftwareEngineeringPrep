@@ -24,7 +24,7 @@
 - Not efficient for random access to items.
 - Worse memory locality than arrays.
 
-- In `Python`, `list`s are [*not*](https://stackoverflow.com/questions/280243/python-linked-list) linked lists!
+- `Python` `list`s are atually [*not*](https://stackoverflow.com/questions/280243/python-linked-list) linked lists! They are implemented so as to enjoy the benefits of both arrays and linked lists though.
 
 ## Stacks and Queues
 
@@ -35,13 +35,22 @@
     - Average "waiting time" for jobs is identical for FIFO and LIFO. Maximum time varies (FIFO minimizes max waiting time).
     - Harder to implement, appropriate when order is important.
     - Used for searches in graphs.
+- Priority queues (insert_with_priority, pull_highest_priority (= get_maximum_element))
+    - Like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it.
+    - An element with high priority is served before an element with low priority.
+    - Often implemented with heaps or self-balanced binary search trees.
 - Stacks and Queues can be effectively implemented by dynamic arrays or linked lists. If upper bound of size is known, static arrays can also be used.
+
+
 
 ## Dictionary Structures
 
-- Enable access to data items by content (key).
+- Enable access to data items by content (key). Keys constitute a *set*: they are unique and unordered.
 - Operations: search, insert, delete, max, min, predecessor/successor (next or previous element in sorted order).
 - Implementations include: **hash tables**, **(binary) search trees**.
+- For a key to be valid, it must be *hashable*.
+
+- `Python` `dict`s are built with hash tables, using the core `hash()` function. 
 
 ## Binary Search Trees
 
@@ -67,12 +76,14 @@ Use BST over hash table for:
 
 ### Tree Traversal
 
-- DFS (depth first)
+- DFS (depth first) - 3 ways to do it (depending on root checking)
     - Pre-order: root, left, right
     - In-order: left, root, right
     - Post-order: left, right, root
 - BFS (breadth first)
+    - "Level first search"
     - Implemented using a queue, visit all nodes at current level, advance to next level (doesn't use recursion).
+
 
 ### Balanced BST
 
@@ -113,15 +124,42 @@ Use BST over hash table for:
 - An implementation of a dictionary.
 - A hash function is a mathematical function that maps keys to integers.
 - The value of the hash function is used as an index into an array, and the item is stored at that position in the array.
-- The hash function `H` maps each string (key) to a unique (but large) integer by treating the characters of the string as “digits” in a `base-α` number system (where `α` = number of available characters, 26 for English).
+- (True in general?) The hash function `H` maps each string (key) to a unique (but large) integer by treating the characters of the string as “digits” in a `base-α` number system (where `α` = number of available characters, 26 for English).
 - Java's `String.hashCode()` function is computed as: `s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]`.
-- This produces a very large number, which is reduced by taking the remainder of `H(S) mod m` (where `m` is the size of the hash table and `H` is the hashing function).
+- `Python`'s `hash()` function depends on the type of the input. For strings it [is](https://stackoverflow.com/questions/2070276/where-can-i-find-source-or-algorithm-of-pythons-hash-function)
+```c
+static long string_hash(PyStringObject *a)
+{
+    register Py_ssize_t len;
+    register unsigned char *p;
+    register long x;
+
+    if (a->ob_shash != -1)
+        return a->ob_shash;
+    len = Py_SIZE(a);
+    p = (unsigned char *) a->ob_sval;
+    x = *p << 7;
+    while (--len >= 0)
+        x = (1000003*x) ^ *p++;
+    x ^= Py_SIZE(a);
+    if (x == -1)
+        x = -2;
+    a->ob_shash = x;
+    return x;
+}
+```
+- This produces a very large number, which is reduced by taking the remainder of `H(S) mod m` (where `m` is the size of the hash table, also call the number of *buckets*, and `H` is the hashing function).
 - Two distinct keys will occasionally hash to the same value, causing a *collision*.
-- One solution to collision is *chaining* – representing the hash table as a array of `m` linked lists, where each list's items are hashed to the same value.
-- A second solution to collision is *open addressing* – inserting an item in its place, or if it's taken, in the next available place. Upon query, after finding the hash, you check if the key is identical. If not, you move to the next cell in the array to check there (the array is initiated with all null values, and moving on to the next cell is done until a null cell is encountered). Upon deletion of an item, all items must be reinserted to the array.
-- A third solution is *double hashing* – repeatedly hashing on the first hash until the item is found, an empty cell is found, or the entire table has been scanned.
-- All three solutions are `O(m)` for initializing an `m`-element hash table to set null elements prior to first insertion.
-- Traversing all elements in the table is `O(n + m)` for chaining and `O(m)` for open addressing (`n` = inserted keys, `m` = max hash table size).
+    - One solution to collision is *chaining* – representing the hash table as a array of `m` linked lists, where each list's items are hashed to the same value.
+    - A second solution to collision is *open addressing* – inserting an item in its place, or if it's taken, in the next available place. Upon query, after finding the hash, you check if the key is identical. If not, you move to the next cell in the array to check there (the array is initiated with all null values, and moving on to the next cell is done until a null cell is encountered). Upon deletion of an item, all items must be reinserted to the array.
+    - A third solution is *double hashing* – repeatedly hashing on the first hash until the item is found, an empty cell is found, or the entire table has been scanned.
+        - All three solutions are `O(m)` for initializing an `m`-element hash table to set null elements prior to first insertion.
+        - Traversing all elements in the table is `O(n + m)` for chaining and `O(m)` for open addressing (`n` = inserted keys, `m` = max hash table size).
+    - One can also augment the size `m` to avoid collisions and the resulting potential in-bucket search, but this takes more space.
+    - The `load factor` is the ratio between number of entries to hash and number of buckets.
+        - l.f. << 1: most buckets are empty, this wastes space.
+        - l.f. ~ 1 or more: most buckets are heavy, this costs time in in-bucket search.
+        - It is advised to rehash when the l.f. approaches 1.
 - Pragmatically, a hash table is often the best data structure to maintain a dictionary.
 - In Java the size of a `HashMap` is always a power of 2, for the bit-mask (modulo equivalent) to be effective.
 - In Java 8 the `HashMap` can store bins as trees in addition to linked lists (more than 8 objects get converted to a red-black tree).
@@ -174,6 +212,7 @@ Use BST over hash table for:
     - Lists make it harder to tell if an edge is in the graph, since it requires searching the appropriate list, but this can be avoided.
     - The parent list represents each of the vertices, and a vertex's inner list represents all the vertices the vertex is connected to (the edges for that vertex).
     - Each vertex appears at least twice in the structure – once as a vertex with a list of connected vertices, and at least once in the list of vertex for the vertices it's connected to (in undirected graphs).
+    - **Edge Lists**: the list of edges.
 - We'll mainly use adjacency lists as a graph's data structure.
 - Traversing a graph (breadth or depth) uses 3 states for vertices: undiscovered, discovered, processed (all edges have been explored).
 - Most fundamental graph operation is traversal.

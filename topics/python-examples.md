@@ -116,6 +116,25 @@ class Apple extends BaseFruit implements Serializable {
 }
 ``` -->
 
+Using `super()` (see [here](https://stackoverflow.com/questions/576169/understanding-python-super-with-init-methods))
+```python
+class Base(object):
+    def __init__(self):
+        print "Base created"
+
+class ChildA(Base):
+    def __init__(self):
+        """ hard coding the name of Base class: dangerous in multiple inheritance """
+        Base.__init__(self)
+
+class ChildB(Base):
+    def __init__(self):
+        """ super() avoids had coding """
+        super().__init__()
+        # super(ChildB, self).__init__() # in Python < 3
+```
+
+
 ## Hacks 
 
 

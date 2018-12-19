@@ -68,6 +68,20 @@ class LinkedList(object):
                 previous.next = current.next
             else:
                 self.head = current.next
+
+    def search(self, find_val):
+        # use a helper function to allow passing current element as input, while using head here
+        return self.search_helper(self.head, find_val)
+        
+    def search_helper(self, current, find_val):
+        if current:
+            if current.value == find_val:
+                return True
+            else:
+                # must "return", not only call recursively (even if base case does return)
+                return self.search_helper(current.next, find_val) 
+        else:
+            return False
 ```
 
 
@@ -145,25 +159,90 @@ class Queue:
         return out
 ```
 
+## Hash Map
+
+```python
+class HashTable(object):
+    """
+    Write a (basic, non-space optimised)
+    HashTable class that stores strings
+    in a hash table, where keys are calculated
+    using the first two letters of the string.
+    """
+
+    def __init__(self):
+        self.table = [None]*10000
+
+    def store(self, string):
+        """Input a string that's stored in 
+        the table."""
+        idx = self.calculate_hash_value(string)
+        if self.table[idx] is None:
+            self.table[idx] = [string]
+        else:
+            self.table[idx].append(string)
+
+    def lookup(self, string):
+        """Return the hash value if the
+        string is already in the table.
+        Return -1 otherwise."""
+        idx = self.calculate_hash_value(string)
+        if self.table[idx] is None:
+            return -1
+        else:
+            if string in self.table[idx]:
+                return idx
+            else:
+                return -1
+
+    def calculate_hash_value(self, string):
+        """Helper function to calulate a
+        hash value from a string."""
+        if len(string) < 2:
+            raise ValueError('string must have 2 elements at least')
+        upp = string.upper()
+        return 100*ord(upp[0]) + ord(upp[1])
+```
+
+
 ## Binary Tree
 
-<!-- ```java
-class Tree {
-    public int value;
-    public Tree left;
-    public Tree right;
+```python
+class Node(object):
+    def __init__(self, value):
+        self.value = value
+        self.left = None  # Node
+        self.right = None # Node
 
-    public Tree(int value) {
-        this(value, null, null)
-    }
+class BinaryTree(object):
+    def __init__(self, root):
+        self.root = Node(root)
 
-    public Tree(int value, Tree left, Tree right) {
-        this.value = value;
-        this.left = left;
-        this.right = right;
-    }
-}
-``` -->
+    def search(self, find_val):
+        # use a helper function to allow passing current element as input, while using root here
+        return self.preorder_search(self.root, find_val)
+
+    def print_tree(self):
+        return self.preorder_print(self.root, "")[:-1]
+
+    def preorder_search(self, current, find_val):
+        """ current: Node """
+        if current:
+            if current.value == find_val:
+                return True
+            else:
+                # must "return", not only call recursively (even if base case does return)
+                return self.preorder_search(current.left, find_val) or self.preorder_search(current.right, find_val)
+        return False
+
+    def preorder_print(self, current, traversal):
+        """ current: Node """
+        if current:
+            traversal += (str(current.value) + "-")
+            traversal = self.preorder_print(current.left, traversal)
+            traversal = self.preorder_print(current.right, traversal)
+        return traversal
+```
 
 ## Graph
 
