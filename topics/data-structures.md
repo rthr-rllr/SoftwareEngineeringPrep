@@ -210,12 +210,18 @@ static long string_hash(PyStringObject *a)
     - The matrix representation allows rapid updates for edges (insertion, deletion) or to tell if an edge is connecting two vertices, but uses a lot of space for graphs with many vertices but relatively few edges.
     - **Adjacency Lists**: we can represent a sparse graph by using linked lists to store the neighbors adjacent to each vertex.
     - Lists make it harder to tell if an edge is in the graph, since it requires searching the appropriate list, but this can be avoided.
-    - The parent list represents each of the vertices, and a vertex's inner list represents all the vertices the vertex is connected to (the edges for that vertex).
+    - The parent list represents each of the vertices (element `i` describes node `i`, can be `None` if `i` is not a node, or simply rename the nodes), and a vertex's inner list represents all the vertices the vertex is connected to (the edges for that vertex).
     - Each vertex appears at least twice in the structure – once as a vertex with a list of connected vertices, and at least once in the list of vertex for the vertices it's connected to (in undirected graphs).
     - **Edge Lists**: the list of edges.
 - We'll mainly use adjacency lists as a graph's data structure.
-- Traversing a graph (breadth or depth) uses 3 states for vertices: undiscovered, discovered, processed (all edges have been explored).
+- Traversing a graph (breadth first or depth first) uses 3 states for vertices: undiscovered, discovered, processed (all edges have been explored).
+    - depth first search is often performed using a stack to account for visited nodes.
+    - it is often a queue for breath first search.
+    - both take `O(|E|+|V|)` time.
 - Most fundamental graph operation is traversal.
+- Notorious traversals:
+    - an *Eulerian path* is a trail in a finite graph which visits every *edge* exactly once.
+    - a *Hamiltonian path* is a path in an undirected or directed graph that visits each *vertex* exactly once.
 
 ## Additional Trees
 
