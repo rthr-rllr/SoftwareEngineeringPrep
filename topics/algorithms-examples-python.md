@@ -51,15 +51,32 @@ public void inOrder(Tree tree) {
 
 ### Pre-Order
 
-<!-- ```java
-public void preOrder(Tree tree) {
-    if (tree == null) return;
+```python
+def preorder_search(self, find_val):
+    # use a helper function to allow passing current element as input, while using root here
+    return self.preorder_search_helper(self.root, find_val)
 
-    // process tree.value
-    preOrder(tree.left);
-    preOrder(tree.right);
-}
-``` -->
+def preorder_search_helper(self, current, find_val):
+    """ current: Node """
+    if current:
+        if current.value == find_val:
+            return True
+        else:
+            # must "return", not only call recursively (even if base case does return)
+            return self.preorder_search_helper(current.left, find_val) or self.preorder_search_helper(current.right, find_val)
+    return False
+
+def preorder_print(self):
+    return self.preorder_print_helper(self.root, "")[:-1]
+
+def preorder_print_helper(self, current, traversal):
+    """ current: Node """
+    if current:
+        traversal += (str(current.value) + "-")
+        traversal = self.preorder_print_helper(current.left, traversal)
+        traversal = self.preorder_print_helper(current.right, traversal)
+    return traversal
+```
 
 Without recursion:
 
@@ -366,61 +383,70 @@ private void reset(Graph graph) {
 
 ### BFS
 
-<!-- ```java
-public void bfs(Graph graph, Vertex source) {
-    reset(graph);
-    Queue<Vertex> q = new LinkedList<>();
-    q.add(source);
-    source.discovered = true;
 
-    while (!q.isEmpty()) {
-        Vertex from = q.remove();
+Iterative:
 
-        for (Edge e : from.edges) {
-            Vertex to = graph.vertices.get(e.to);
+```python
+def bfs(self, start_node):
+    """An iterative implementation of Breadth First Search
+    iterating through a node's edges. The output should be a list of
+    numbers corresponding to the traversed nodes.
+    ARGUMENTS: start_node_num is the node number (integer)
+    MODIFIES: the value of the visited property of nodes in self.nodes
+    RETURN: a list of the node values (integers)."""
+    self._clear_visited()
+    ret_list = []
 
-            if (!to.discovered) {
-                to.parent = from;
-                to.discovered = true;
-                q.add(to);
-            }
-        }
-    }
-}
-
-``` -->
+    queue = [start_node]
+    start_node.visited = True
+    def enqueue(n, q=queue):
+        n.visited = True
+        q.append(n)
+    def unvisited_outgoing_edge(n, e):
+        return ((e.node_from.value == n.value) and
+                (not e.node_to.visited))
+    while queue:
+        node = queue.pop(0)
+        ret_list.append(node.value)
+        for e in node.edges:
+            if unvisited_outgoing_edge(node, e):
+                enqueue(e.node_to)
+    return ret_list
+```
 
 ### DFS
 
-<!-- ```java
-public void dfs(Graph graph) {
-    reset(graph);
+Recursive:
 
-    for (Vertex v : graph.vertices.values()) {
-        if (!v.discovered)
-            dfs(graph, v);
-    }
-}
+```python
+def dfs_helper(self, start_node):
+    """The helper function for a recursive implementation
+    of Depth First Search iterating through a node's edges. The
+    output should be a list of numbers corresponding to the
+    values of the traversed nodes.
+    ARGUMENTS: start_node is the starting Node
+    REQUIRES: self._clear_visited() to be called before
+    MODIFIES: the value of the visited property of nodes in self.nodes 
+    RETURN: a list of the traversed node values (integers).
+    """
+    ret_list = [start_node.value]
+    start_node.visited = True
+    edges_out = [e for e in start_node.edges
+                 if e.node_to.value != start_node.value]
+    for edge in edges_out:
+        if not edge.node_to.visited:
+            ret_list.extend(self.dfs_helper(edge.node_to))
+    return ret_list
 
-private void dfs(Graph graph, Vertex v) {
-    v.discovered = true;
-    // TODO: insert application of DFS here
-
-    for (Edge e : v.edges) {
-        Vertex to = graph.vertices.get(e.to);
-
-        if (to.discovered) {
-            // cycle found (back edge)! What should we do? depends on the application...
-        } else {
-            to.parent = v;
-            dfs(graph, to);
-        }
-    }
-
-    // TODO: insert application of DFS here. For example: if we're doing topological sorting
-    //       then add v to head of a linked list at this point
-}
-``` -->
+def dfs(self, start_node):
+    """Outputs a list of numbers corresponding to the traversed nodes
+    in a Depth First Search.
+    ARGUMENTS: start_node_num is the starting node number (integer)
+    MODIFIES: the value of the visited property of nodes in self.nodes
+    RETURN: a list of the node values (integers)."""
+    self._clear_visited()
+    return self.dfs_helper(start_node)
+```
 
 ### Dijkstra
 

@@ -171,11 +171,12 @@ static long string_hash(PyStringObject *a)
 
 ## Priority Queues
 
-- The heap is a priority queue.
+- Abstract data type, often implemented using heaps.
 - Provide more flexibility than simple sorting, because they allow new elements to enter a system at arbitrary intervals.
 - It is much more cost-effective to insert a new job into a priority queue than to re-sort everything on each such arrival.
 - Operations: insert, find-minimum/maximum, delete-minimum/maximum.
 - The "priority" criteria can be "length", "size", "id", etc.
+
 
 ### Heap
 
@@ -190,7 +191,7 @@ static long string_hash(PyStringObject *a)
 - Performing a search in a heap requires linear scanning – we can't do a `log(n)` search like in a binary search tree.
 - All we know in a min-heap is that the child is larger than the parent, we don't know about the relationship between the children.
 - To insert an item we add it at the end of the array, and then bubble it up if it's smaller that its parent (switch between the parent and the child), until we reach a smaller parent or the root of the tree. This insertion in `O(log(n))`.
-- The minimum of the tree is the root. To extract it, we remove the root, and replace it with the last element in the array (bottom rightmost leaf). We then check if it's smaller than both its children. If not, we perform a swap with the smallest child, and bubble the swap down recursively all the way until the criteria is met. This is called *"heapify"*. This operation requires `O(log(n))`.
+- The minimum of the tree is the root. To extract it, we remove the root, and replace it with the last element in the array (bottom rightmost leaf). We then check if it's smaller than both its children. If not, we perform a swap with the smallest child, and bubble the swap down recursively all the way until the criteria is met. This is called *"heapify"*. Thus root extraction (the operation a heap is made for) requires `O(log(n))`.
 - Heapify gets the array, index of the node, and the length of the heap.
 - To build a heap from an array iterate from the last element to the first and call heapify on each. This costs `O(n)` for a tight analysis (a less tight analysis yields `O(nlog(n))`, which is correct but not tight).
 

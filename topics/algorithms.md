@@ -188,8 +188,8 @@
 
 ### Shortest-Paths
 
-- Find the path with minimal edge *weights* between a source vertex and every other vertex in the graph.
-- Similarly, BFS finds a shortest-path for an *unweighted* graph in terms of number of edges.
+- Find the path with minimal edge *weights* between a source vertex and any (every) other vertex in the graph.
+- Similarly, shortest-path for an *unweighted* graph, that is in terms of number of edges, is simply done with BFS.
 - Sub-paths of shortest-paths are also shortest-paths.
 - Graphs with negative-weight cycles don't have a shortest-paths solution.
 - Some algorithms assume no negative weights.
@@ -204,19 +204,25 @@
 - Algorithm for finding the shortest-paths between nodes in a graph, which may represent, for example, road networks.
 - Assumes that edge weight is nonnegative.
 - Fixes a single node as the *source* node and finds shortest-paths from the source to all other nodes in the graph, producing a shortest-path tree.
-- The algorithm uses a min-priority queue for vertices based on their `.distance` value (shortest-path estimate).
+- The algorithm uses a min-priority queue for vertices based on their `.distance` value (shortest-path estimate). Whenever a new node has to be explored, pop it from the min-priority queue, and update the distances based on the new info it provides.
 - It also maintains a set of vertices whose final shortest-path weights from the source have already been determined.
+- Basic complexity is `O(|V|)`, but can be pushed to `O(|E|+|V|log|V|)` if the priority queue is well optimized.
+
 
 #### A*
 
 - An extension of Dijkstra which achieves better time performance by using heuristics.
 
-## Backtracking
+## Backtracking / Memoization / Dynamic Programming
 
 - General algorithm for finding all (or some) solutions to a problem, that incrementally builds candidates to the solution, and abandons ("backtracks") each partial candidate as soon as it determines that it cannot possibly be completed to a valid solution.
-- The classic textbook example of the use of backtracking is the eight queens puzzle; another one is the knapsack problem.
+- The classic textbook example of the use of backtracking is the eight queens puzzle; another one is the knapsack problem; another one the Aristotle's 38 problem.
 - Backtracking can be applied only for problems which admit the concept of a "partial candidate solution" and a relatively quick test of whether it can possibly be completed to a valid solution.
+    - ask yourself:  "Is my problem breakable in smaller sub-problems?"
 - When it is applicable, however, backtracking is often much faster than brute force enumeration of all complete candidates, since it can eliminate a large number of candidates with a single test.
+
+- Dynamic programming is simply the technique of using memoization (a.k.a. caching intermediate solutions in a lookup table) for optimizing programs using backtracking.
+- Check [this post](https://loveforprogramming.quora.com/Backtracking-Memoization-Dynamic-Programming) for examples.
 
 ## Levenshtein Distance
 
@@ -226,4 +232,4 @@
 
 ## Resources
 
-- this [site](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html) with a lot of algorithms visualisations, great to feel what's going on.
+- this [site](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html) with a lot (all?!) of algorithms visualisations, great to feel what's going on.
