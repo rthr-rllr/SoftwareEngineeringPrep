@@ -334,6 +334,37 @@ def binary_search(input_array, value):
     return -1
 ```
 
+
+### Backtracking
+
+A de-contextualized example (from my *Aristotle38* puzzle):
+
+```python
+def solve(self):
+    """
+    recursive backtracking solver.
+    """
+    idx  = self._nextEmpty()
+    
+    # base case    
+    if -1 == idx:
+        return True
+    # else, choose a number between 1 and 19 (depending on ._testOrder)
+    for n in self._testOrder:
+
+        # assign n to board[idx]
+        self.board[idx] = n
+
+        # check if this works
+        if self._isValid() and self.solve():
+            return True
+        # otherwise, backtrack
+        else:
+            self.board[idx] = Board.empty
+
+    return False
+```
+
 ## Selection
 
 ### Quickselect
