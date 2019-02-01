@@ -135,6 +135,12 @@ class ChildB(Base):
 ```
 
 
+`@classmethod` vs. `@staticmethod`
+See the first and nicely completting second answer for this [question](https://github.com/0-tree/SoftwareEngineeringPrep.git).
+My take to date is that `@classmethod` is close to `@staticmethod`, with a major change when used for factory. If factory is called from an child object, then this child object will be the factorer if `@classmethid` was used in the parent class.
+See also good code examples in the second answer.
+
+
 ## Hacks 
 
 
